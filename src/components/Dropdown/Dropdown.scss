@@ -1,0 +1,39 @@
+@import '../../styles/mixins';
+
+.dropdown {
+    
+    div.MuiPaper-root {
+        transition: none !important;
+      }
+
+    .MuiFormControl-root {
+        margin: 0;
+
+        .MuiSelect-select {
+            height: 48px;
+            padding-top: 0;
+            padding-bottom: 0;
+            @include rem(line-height, 48);
+            text-align: left
+        }
+
+        .MuiInput-root {
+            &:hover {
+                animation: none;
+            }
+        }
+
+        .flag {
+            margin-left: 8px;
+        }
+    }
+}
+
+
+// Dropdown menu opens as a separate element
+.MuiModal-root, .dropdown {
+
+    img.flag {
+        margin-right: 8px;
+    }
+}

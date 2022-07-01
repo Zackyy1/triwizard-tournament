@@ -1,0 +1,24 @@
+@import '../styles/mixins';
+
+@include mobile {
+    .contact-us {
+        padding: 80px 44px 40px;
+
+        .contact-info {
+            padding-bottom: 24px;
+        }
+
+        form {
+
+            .split {
+                display: flex;
+                flex-direction: column;
+
+                .field {
+                    width: 100%;
+                    max-width: unset;
+                }
+            }
+        }
+    }
+}
