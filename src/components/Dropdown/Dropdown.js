@@ -1,15 +1,23 @@
 import React from 'react'
-import { FormControl, MenuItem, Select } from '@mui/material'
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import './Dropdown.scss'
 
 
-const Dropdown = ({ items, isCountries }) => {
+const Dropdown = ({ items, isCountries, name, required }) => {
+
+    const label = `${name}${required ? '*' : ''}`
+
     return (
-        <div className='dropdown'>
+        <div className='dropdown field'>
 
-            <FormControl  fullWidth variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <FormControl fullWidth variant="standard" sx={{
+                m: 1, minWidth: 120, '& .MuiPaper-root': {
+                    maxHeight: "100px"
+                }
+            }} >
+                <InputLabel id="demo-simple-select-label">{label}</InputLabel>
 
-                <Select  id="industry-dropdown" labelId="industry-label">
+                <Select label={label} id="industry-dropdown" labelId="industry-label">
 
                     {items.map(item => <MenuItem disableAnimations key={item.value} value={item.value}>
                         {isCountries && <img className='flag' src={`https://flagcdn.com/w20/${item.value.toLowerCase()}.png`} alt="..." />}{item.label}

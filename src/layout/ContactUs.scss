@@ -2,8 +2,7 @@
 
 .contact-us {
     padding: 80px 72px 40px;
-    max-width: 1184px;
-    // width: 100%;
+    max-width: 1040px;
     margin: 0 auto;
 
     display: grid;
@@ -17,7 +16,6 @@
         margin-bottom: 56px;
         grid-column-start: 2;
         text-align: left;
-
     }
 
     .background {
@@ -44,11 +42,7 @@
         .item {
 
             &:first-child {
-                margin-bottom: 16px;
-            }
-
-            p {
-                
+                margin-bottom: 28px;
             }
 
             a {
@@ -75,16 +69,17 @@
             row-gap: 36px;
 
             .field {
-                max-width: 284px;
-            
+
+                &:not(.textarea) {
+
+                    max-width: 284px;
+                }
+
 
                 &:nth-child(even) {
                     margin-right: 0;
                 }
 
-
-
-                input {}
             }
         }
 

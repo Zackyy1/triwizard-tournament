@@ -1,17 +1,37 @@
 @import '../../styles/mixins';
 
-.custom-input {
-    width: 100%;
+.field.input {
 
-    div {
+    &.textarea {
+        max-width: unset;
+        grid-area: 6 / span 2;
         width: 100%;
+
+        label {
+            text-align: left;
+            @include rem(line-height, 24);
+            color: black;
+        }
+
+        .MuiInput-root::before {
+            display: none;
+        }
+
+        textarea:not([readonly]) {
+            border: 1px solid black;
+            padding: 8px;
+        }
     }
 
-    input {
-        height: 48px;
-        padding: 0;
-        @include rem(line-height, 48);
+    .custom-input {
         width: 100%;
-        min-width: 180px;
+
+        div {
+            width: 100%;
+        }
+
+        input {
+            @include defaultInput();
+        }
     }
 }

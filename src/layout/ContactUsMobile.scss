@@ -14,10 +14,16 @@
                 display: flex;
                 flex-direction: column;
 
-                .field {
+                .field:not(.textarea) {
                     width: 100%;
                     max-width: unset;
+
                 }
+
+                .spacer {
+                    display: none;
+                }
+
             }
         }
     }

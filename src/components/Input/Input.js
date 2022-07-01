@@ -1,12 +1,23 @@
-import { TextField } from '@mui/material'
+import { InputLabel, TextField } from '@mui/material'
 import React from 'react'
 import './Input.scss'
 
-const Input = ({ name, type, placeholder, required, disabled }) => {
+const Input = ({ textarea, name, label, type, placeholder, required, disabled }) => {
     const correctPlaceholder = required ? `${placeholder}*` : placeholder
 
     return (
-        <TextField className='custom-input' variant={'standard'} name={name} type={type} placeholder={correctPlaceholder} required={required} disabled={disabled} />
+        <div className={`input field ${!!textarea ? 'textarea' : ''}`}>
+
+            {label && <InputLabel>{label}</InputLabel>}
+
+            <TextField multiline={!!textarea} rows={!!textarea ? '4' : undefined} style={{
+                '&:hover fieldset': {
+                    borderColor: 'grey',
+                },
+            }} className='custom-input' variant={'standard'} name={name} type={type} placeholder={correctPlaceholder} required={required} disabled={disabled} />
+        </div>
+
+
     )
 }
 

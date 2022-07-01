@@ -2,23 +2,45 @@ import React, { lazy, Suspense, useState } from 'react'
 import './ContactUs.scss'
 import './ContactUsTablet.scss'
 import './ContactUsMobile.scss'
-import Dropdown from '../components/Dropdown/Dropdown'
+
 import countries from '../shared/countries'
 
 const Input = lazy(() => import('../components/Input/Input'))
+const Dropdown = lazy(() => import('../components/Dropdown/Dropdown'))
 
 
+// Configuration for dropdowns
+const industries = ['Automotive', 'Banking', 'Consulting', 'Finance', 'Healthcare', 'Media/PR', 'Retail', 'Technology', 'Telecommunication', 'Other']
+const operatingGeographies = ['National', 'Regional', 'Global']
 
 export const ContactUs = () => {
     const [industry, setIndustry] = useState(null)
+    const [country, setCountry] = useState(null)
+    const [operatingGeography, setOperatingGeography] = useState(null)
 
-
-
-    const composeIndustryItems = () => {
+    const composeCountryItems = () => {
         return countries.map(country => {
             return {
                 label: country.name,
                 value: country.code
+            }
+        })
+    }
+
+    const composeIndustryItems = () => {
+        return industries.map(industry => {
+            return {
+                label: industry,
+                value: encodeURIComponent(industry.toLowerCase())
+            }
+        })
+    }
+
+    const composeGeographyItems = () => {
+        return operatingGeographies.map(geography => {
+            return {
+                label: geography,
+                value: encodeURIComponent(geography.toLowerCase())
             }
         })
     }
@@ -44,25 +66,16 @@ export const ContactUs = () => {
                 <Suspense fallback={null}>
 
                     <div className='split'>
-                        <div className='field'>
-                            <Input name="first-name" placeholder="First name" required type="text" />
-                        </div>
-                        <div className='field'>
-                            <Input name="last-name" placeholder="Last name" type="text" />
-                        </div>
-                        <div className='field'>
-                            <Input name="email" placeholder="Email" required type="text" />
-                        </div>
-                        <div className='field'>
-                            <Input name="job-title" placeholder="Job title" type="text" />
-                        </div>
+                        <Input name="first-name" placeholder="First name" required type="text" />
+                        <Input name="last-name" placeholder="Last name" type="text" />
+                        <Input name="email" placeholder="Email" required type="text" />
+                        <Input name="job-title" placeholder="Job title" type="text" />
                         <div className='spacer'></div>
-                        <div className='field'>
-                            <Input name="company-name" placeholder="Company name" required type="text" />
-                        </div>
-                        <div className='field'>
-                            <Dropdown items={composeIndustryItems()} isCountries onChange={setIndustry} />
-                        </div>
+                        <Input name="company-name" placeholder="Company name" required type="text" />
+                        <Dropdown required name={'Industry'} items={composeIndustryItems()} onChange={setIndustry} />
+                        <Dropdown required name={'Country'} items={composeCountryItems()} isCountries onChange={setCountry} />
+                        <Dropdown name={'Operating geography'} items={composeGeographyItems()} onChange={setOperatingGeography} />
+                        <Input textarea name="topic" label={"What would you like to talk about?"} />
 
                     </div>
 

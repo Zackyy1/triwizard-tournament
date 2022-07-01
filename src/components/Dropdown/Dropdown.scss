@@ -1,13 +1,28 @@
 @import '../../styles/mixins';
 
+@mixin flag() {
+    height: 16px;
+    width: 26px;
+    margin-right: 8px;
+
+}
+
 .dropdown {
-    
+
+    div {
+        background: none !important;
+    }
+
     div.MuiPaper-root {
         transition: none !important;
-      }
+    }
 
     .MuiFormControl-root {
         margin: 0;
+
+        .MuiInputLabel-shrink {
+            display: none;
+        }
 
         .MuiSelect-select {
             height: 48px;
@@ -17,7 +32,16 @@
             text-align: left
         }
 
+        label {
+            @include rem(line-height, 14);
+            height: 48px;
+            color: rgba(0, 0, 0, 0.389);
+
+        }
+
         .MuiInput-root {
+            margin: 0;
+
             &:hover {
                 animation: none;
             }
@@ -31,9 +55,53 @@
 
 
 // Dropdown menu opens as a separate element
-.MuiModal-root, .dropdown {
+.MuiModal-root,
+.dropdown {
 
     img.flag {
-        margin-right: 8px;
+        @include flag();
+    }
+}
+
+.MuiModal-root {
+
+   
+
+    max-width: 180px;
+
+    .MuiPaper-root {
+        border-radius: 0 !important;
+        border: 1px solid black;
+        box-shadow: none;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+          }
+        
+          &::-webkit-scrollbar-track {
+            background: #85a7ae; 
+          }
+           
+          &::-webkit-scrollbar-thumb {
+            background: #1d2441a9; 
+          }
+          
+          &::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+          }
+
+          
+
+    }
+
+    ul {
+        background-color: #a7d0d8;
+
+        li {
+            white-space: normal;
+            &:hover {
+                background-color:#85a7ae;
+            }
+        }
     }
 }
