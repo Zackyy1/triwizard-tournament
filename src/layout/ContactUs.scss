@@ -1,95 +1,86 @@
-@import '../styles/mixins';
+@import "../styles/mixins";
 
 .contact-us {
-    padding: 80px 72px 40px;
-    max-width: 1040px;
-    margin: 0 auto;
+  padding: 80px 72px 40px;
+  max-width: 1040px;
+  margin: 0 auto;
 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(228px, 3fr));
-    grid-template-rows: 106px 1fr;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(228px, 3fr));
+  grid-template-rows: 106px 1fr;
 
-    h4 {
-        @include rem(font-size, 40);
-        @include rem(line-height, 50);
-        font-weight: 200;
-        margin-bottom: 56px;
-        grid-column-start: 2;
-        text-align: left;
+  h4 {
+    @include rem(font-size, 40);
+    @include rem(line-height, 50);
+    font-weight: 200;
+    margin-bottom: 56px;
+    grid-column-start: 2;
+    text-align: left;
+  }
+
+  .background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    background-color: #a7d0d8;
+    z-index: -1;
+  }
+
+  .contact-info {
+    position: static;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    text-align: left;
+    @include rem(line-height, 28);
+    @include rem(font-size, 18);
+
+    .item {
+      &:first-child {
+        margin-bottom: 28px;
+      }
+
+    }
+  }
+
+  form {
+    grid-area: 2 / span 2;
+    justify-self: start;
+    width: 75%;
+
+    .spacer {
+      grid-area: 3 / span 2;
     }
 
-    .background {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        width: 100%;
-        min-height: 100vh;
-        height: 100%;
-        background-color: #a7d0d8;
-        z-index: -1;
+    .checkboxes {
+      grid-area: 7 / span 2;
     }
 
-    .contact-info {
-        position: static;
-        grid-column-start: 1;
-        grid-row-start: 2;
-        text-align: left;
-        @include rem(line-height, 28);
-        @include rem(font-size, 18);
+    .split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 24px;
+      row-gap: 36px;
 
-        .item {
-
-            &:first-child {
-                margin-bottom: 28px;
-            }
-
-            a {
-                color: #140923;
-                opacity: 0.6;
-                text-decoration: none;
-            }
-        }
-    }
-
-    form {
-        grid-area: 2 / span 2;
-        justify-self: start;
-        width: 75%;
-
-        .spacer {
-            grid-area: 3 / span 2;
-        }
-
-        .split {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            column-gap: 24px;
-            row-gap: 36px;
-
-            .field {
-
-                &:not(.textarea) {
-
-                    max-width: 284px;
-                }
-
-
-                &:nth-child(even) {
-                    margin-right: 0;
-                }
-
-            }
+      .field {
+        &:not(.textarea) {
+          max-width: 284px;
         }
 
+        &:nth-child(even) {
+          margin-right: 0;
+        }
+      }
     }
-
+  }
 }
 
-
 @include max-tablet {
-    .contact-us form {
-        width: 100%;
-    }
+  .contact-us form {
+    width: 100%;
+  }
 }

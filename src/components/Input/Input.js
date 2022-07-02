@@ -10,7 +10,7 @@ const Input = ({ textarea, name, label, type, placeholder, required, disabled })
 
             {label && <InputLabel>{label}</InputLabel>}
 
-            <TextField multiline={!!textarea} rows={!!textarea ? '4' : undefined} style={{
+            <TextField multiline={!!textarea} rows={!!textarea ? '4' : ''} style={{
                 '&:hover fieldset': {
                     borderColor: 'grey',
                 },

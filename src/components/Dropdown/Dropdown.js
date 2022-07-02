@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import './Dropdown.scss'
 
@@ -6,6 +6,7 @@ import './Dropdown.scss'
 const Dropdown = ({ items, isCountries, name, required }) => {
 
     const label = `${name}${required ? '*' : ''}`
+    const [value, setValue] = useState('')
 
     return (
         <div className='dropdown field'>
@@ -17,9 +18,9 @@ const Dropdown = ({ items, isCountries, name, required }) => {
             }} >
                 <InputLabel id="demo-simple-select-label">{label}</InputLabel>
 
-                <Select label={label} id="industry-dropdown" labelId="industry-label">
+                <Select onChange={({target}) => setValue(target.value)} value={value} label={label} id="industry-dropdown" labelId="industry-label">
 
-                    {items.map(item => <MenuItem disableAnimations key={item.value} value={item.value}>
+                    {items.map(item => <MenuItem key={item.value} value={item.value}>
                         {isCountries && <img className='flag' src={`https://flagcdn.com/w20/${item.value.toLowerCase()}.png`} alt="..." />}{item.label}
 
                     </MenuItem>)}
