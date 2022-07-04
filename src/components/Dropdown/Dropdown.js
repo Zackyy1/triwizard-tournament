@@ -11,6 +11,8 @@ const Dropdown = ({ items, isCountries, name, required, label, onChange }) => {
 
     const [value, setValue] = useState('')
 
+    const labelName = `${name}-label`
+
     useEffect(() => {
         onChange(value)
     }, [value, onChange])
@@ -23,9 +25,9 @@ const Dropdown = ({ items, isCountries, name, required, label, onChange }) => {
                         maxHeight: "100px"
                     }
                 }} >
-                    <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+                    <InputLabel id={labelName}>{label}</InputLabel>
 
-                    <Select onChange={({ target }) => setValue(target.value)} value={value} label={label} id="industry-dropdown" labelId="industry-label">
+                    <Select onChange={({ target }) => setValue(target.value)} value={value} label={label} id={name} labelId={labelName}>
 
                         {items.map(item => <MenuItem key={item.value} value={item.value}>
                             {isCountries && <img className='flag' src={`https://flagcdn.com/w20/${item.value.toLowerCase()}.png`} onError={(e) => e.target.classList.add('error')} alt={`${item.label}`} />}{item.label}

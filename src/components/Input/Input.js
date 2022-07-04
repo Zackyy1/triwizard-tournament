@@ -14,13 +14,13 @@ const Input = ({ textarea, name, label, type, placeholder, required, disabled, o
         <div className={`input field ${!!textarea ? 'textarea' : ''}`}>
             <Suspense fallback={null}>
 
-                {label && <InputLabel>{label}</InputLabel>}
+                {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
 
                 <TextField aria-label={placeholder} inputRef={inputRef} onChange={(e) => onChange(inputRef.current?.value)} multiline={!!textarea} rows={!!textarea ? '4' : ''} style={{
                     '&:hover fieldset': {
                         borderColor: 'grey',
                     },
-                }} className='custom-input' variant={'standard'} name={name} type={type} placeholder={correctPlaceholder} required={required} disabled={disabled} />
+                }} className='custom-input' variant={'standard'} id={name} name={name} type={type} placeholder={correctPlaceholder} required={required} disabled={disabled} />
             </Suspense>
         </div>
     )

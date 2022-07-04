@@ -39,8 +39,9 @@ const Functions = {
         let result = ''
         Object.keys(object).map(key => {
             if (!(skipEmptyValues && !object[key]?.toString().length)) {
-                result += `${key}=${object[key] !== null ? encodeURIComponent(object[key]) : ''}&`
+                return result += `${key}=${object[key] !== null ? encodeURIComponent(object[key]) : ''}&`
             }
+            return null
         })
 
         return `${withQuestionMark ? '?' : ''}${result.substring(0, result.length - 1)}`

@@ -4,7 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Run locally in dev environment
 
-In the project directory, you can run:
+In the project directory, run:
+
+### `npm i`
 
 ### `npm start`
 
@@ -22,3 +24,11 @@ In real-life scenario a bundler would pack react code automatically. If this pro
 
 It will generate a "build" folder in project root with all necessary and minimized files.
 "-p" stands for "Production".
+
+You can then test production-ready version by running
+
+### `serve -s build`
+
+If you don't have `serve` then install it using npm:
+
+### `npm i -g serve`

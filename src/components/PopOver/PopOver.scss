@@ -2,7 +2,7 @@
 @import '../../styles/mixins';
 
 .pop-over {
-    position: absolute;
+    position: fixed;
     display: block;
     left: 0;
     right: 0;

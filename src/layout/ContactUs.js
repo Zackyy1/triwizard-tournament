@@ -37,19 +37,6 @@ export const ContactUs = () => {
     setFormDisabled(!termsAccepted)
   }, [termsAccepted])
 
-  const resetState = () => {
-    // Country, Operating Geography and Industry won't be reset.
-    setFirstName(null)
-    setLastName(null)
-    setInquiry(null)
-    setEmail(null)
-    setJobTitle(null)
-    setCompany(null)
-    setTermsAccepted(false)
-    setNewsletter(false)
-    setFormDisabled(termsAccepted === true)
-    setFormSent(false)
-  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -75,10 +62,7 @@ export const ContactUs = () => {
   return (
     <div className="contact-us" id="contactUs">
 
-      <PopOver onCloseButtonClick={() => {
-        formRef.current?.reset()
-        resetState()
-      }} formRef={formRef} condition={formSent}>
+      <PopOver onCloseButtonClick={() => window.location.reload()} formRef={formRef} condition={formSent}>
 
         <div className="heading">All good!</div>
         <div className="text">
