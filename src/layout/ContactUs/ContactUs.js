@@ -3,20 +3,20 @@ import "./ContactUs.scss"
 import "./ContactUsTablet.scss"
 import "./ContactUsMobile.scss"
 
-import Functions from "../shared/Functions"
-import PopOver from "../components/PopOver/PopOver"
+import Functions from "../../shared/Functions"
 
-const CustomCheckbox = lazy(() => import("../components/CustomCheckbox/CustomCheckbox"))
-const Link = lazy(() => import("../components/Link/Link"))
-const Input = lazy(() => import("../components/Input/Input"))
-const Dropdown = lazy(() => import("../components/Dropdown/Dropdown"))
+const PopOver = lazy(() => import("../../components/PopOver/PopOver"))
+const CustomCheckbox = lazy(() => import("../../components/CustomCheckbox/CustomCheckbox"))
+const Link = lazy(() => import("../../components/Link/Link"))
+const Input = lazy(() => import("../../components/Input/Input"))
+const Dropdown = lazy(() => import("../../components/Dropdown/Dropdown"))
 
 const contactInfo = {
   pressEmail: 'press@tuumplatform.com',
   careerEmail: 'careers@tuumplatform.com'
 }
 
-export const ContactUs = () => {
+const ContactUs = () => {
   const [industry, setIndustry] = useState(null)
   const [country, setCountry] = useState(null)
   const [operatingGeography, setOperatingGeography] = useState(null)
@@ -177,3 +177,5 @@ export const ContactUs = () => {
     </div>
   )
 }
+
+export default ContactUs

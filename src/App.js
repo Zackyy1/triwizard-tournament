@@ -1,8 +1,9 @@
-import './App.css';
 import './styles/_general.scss'
-import { ContactUs } from './layout/ContactUs';
+import { lazy, Suspense } from 'react'
 import { ThemeProvider } from '@mui/system';
 import { createTheme } from '@mui/material';
+
+const ContactUs = lazy(() => import('./layout/ContactUs/ContactUs'))
 
 const theme = createTheme({
   components: {
@@ -29,11 +30,12 @@ function App() {
 
   return (
     <div className="App">
-      <ThemeProvider theme={theme}>
-        <a className="skip-link" href="#contactUs">Skip to content</a>
-
-        <ContactUs />
-      </ThemeProvider>
+      <Suspense fallback={null}>
+        <ThemeProvider theme={theme}>
+          <a className="skip-link" href="#contactUs">Skip to content</a>
+          <ContactUs />
+        </ThemeProvider>
+      </Suspense>
     </div>
   );
 }

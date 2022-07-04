@@ -1,5 +1,4 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
-// import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import './Dropdown.scss'
 
 const FormControl = lazy(() => import('@mui/material/FormControl'))

@@ -1,6 +1,7 @@
 # General info
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repo is for a developer test task.
 
 ## Run locally in dev environment
 

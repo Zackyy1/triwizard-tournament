@@ -29,8 +29,9 @@ const Functions = {
     },
 
     /**
-     * 
-     * @param {Object} object - key value pairs to compose URL parameters from
+     * Transforms an object into URL Parameter type string with encoding
+     * {'a': 'b', 'c': 'd'} => ?a=b&c=d
+     * @param {object} object - key value pairs to compose URL parameters from
      * @param {boolean} skipEmptyValues - if true, will not put empty (or null) values into final result
      * @param {boolean} withQuestionMark - if true, adds '?' in the beginning of result
      * @returns {string} URLParameters
