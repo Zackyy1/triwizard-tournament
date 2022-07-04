@@ -1,9 +1,14 @@
 @import '../../styles/mixins';
+@import '../../styles/variables';
 
 @mixin flag() {
     height: 16px;
     width: 26px;
     margin-right: 8px;
+
+    &.error {
+        display: none;
+    }
 
 }
 
@@ -60,12 +65,11 @@
 
     img.flag {
         @include flag();
+
     }
 }
 
 .MuiModal-root {
-
-   
 
     max-width: 180px;
 
@@ -76,32 +80,35 @@
 
         &::-webkit-scrollbar {
             width: 6px;
-          }
-        
-          &::-webkit-scrollbar-track {
-            background: #85a7ae; 
-          }
-           
-          &::-webkit-scrollbar-thumb {
-            background: #1d2441a9; 
-          }
-          
-          &::-webkit-scrollbar-thumb:hover {
-            background: #555; 
-          }
+        }
 
-          
+        &::-webkit-scrollbar-track {
+            background: #85a7ae;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #1d2441a9;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+
 
     }
 
     ul {
-        background-color: #a7d0d8;
+        background-color: $primary-color;
 
         li {
             white-space: normal;
+
             &:hover {
-                background-color:#85a7ae;
+                background-color: #85a7ae;
             }
+
+            min-height: 36px;
         }
     }
 }

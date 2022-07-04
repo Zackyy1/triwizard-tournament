@@ -1,155 +1,195 @@
-import React, { lazy, Suspense, useState } from "react";
-import "./ContactUs.scss";
-import "./ContactUsTablet.scss";
-import "./ContactUsMobile.scss";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react"
+import "./ContactUs.scss"
+import "./ContactUsTablet.scss"
+import "./ContactUsMobile.scss"
 
-import countries from "../shared/countries";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import Link from "../components/Link/Link";
-import CustomCheckbox from "../components/CustomCheckbox/CustomCheckbox";
+import Functions from "../shared/Functions"
+import PopOver from "../components/PopOver/PopOver"
 
-const Input = lazy(() => import("../components/Input/Input"));
-const Dropdown = lazy(() => import("../components/Dropdown/Dropdown"));
+const CustomCheckbox = lazy(() => import("../components/CustomCheckbox/CustomCheckbox"))
+const Link = lazy(() => import("../components/Link/Link"))
+const Input = lazy(() => import("../components/Input/Input"))
+const Dropdown = lazy(() => import("../components/Dropdown/Dropdown"))
 
-// Configuration for dropdowns
-const industries = [
-  "Automotive",
-  "Banking",
-  "Consulting",
-  "Finance",
-  "Healthcare",
-  "Media/PR",
-  "Retail",
-  "Technology",
-  "Telecommunication",
-  "Other",
-];
-const operatingGeographies = ["National", "Regional", "Global"];
+const contactInfo = {
+  pressEmail: 'press@tuumplatform.com',
+  careerEmail: 'careers@tuumplatform.com'
+}
 
 export const ContactUs = () => {
-  const [industry, setIndustry] = useState(null);
-  const [country, setCountry] = useState(null);
-  const [operatingGeography, setOperatingGeography] = useState(null);
+  const [industry, setIndustry] = useState(null)
+  const [country, setCountry] = useState(null)
+  const [operatingGeography, setOperatingGeography] = useState(null)
+  const [firstName, setFirstName] = useState(null)
+  const [lastName, setLastName] = useState(null)
+  const [inquiry, setInquiry] = useState(null)
+  const [email, setEmail] = useState(null)
+  const [jobTitle, setJobTitle] = useState(null)
+  const [company, setCompany] = useState(null)
+  const [termsAccepted, setTermsAccepted] = useState(false)
+  const [newsletter, setNewsletter] = useState(false)
+  const [formDisabled, setFormDisabled] = useState(termsAccepted === true)
+  const [formSent, setFormSent] = useState(false)
 
-  const composeCountryItems = () => {
-    return countries.map((country) => {
-      return {
-        label: country.name,
-        value: country.code,
-      };
-    });
-  };
+  const formRef = useRef(null)
 
-  const composeIndustryItems = () => {
-    return industries.map((industry) => {
-      return {
-        label: industry,
-        value: encodeURIComponent(industry.toLowerCase()),
-      };
-    });
-  };
+  useEffect(() => {
+    setFormDisabled(!termsAccepted)
+  }, [termsAccepted])
 
-  const composeGeographyItems = () => {
-    return operatingGeographies.map((geography) => {
-      return {
-        label: geography,
-        value: encodeURIComponent(geography.toLowerCase()),
-      };
-    });
-  };
+  const resetState = () => {
+    // Country, Operating Geography and Industry won't be reset.
+    setFirstName(null)
+    setLastName(null)
+    setInquiry(null)
+    setEmail(null)
+    setJobTitle(null)
+    setCompany(null)
+    setTermsAccepted(false)
+    setNewsletter(false)
+    setFormDisabled(termsAccepted === true)
+    setFormSent(false)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const result = {
+      'first-name': firstName,
+      'last-name': lastName,
+      'email': email,
+      'job-title': jobTitle,
+      company,
+      industry,
+      country,
+      operatingGeography,
+      inquiry,
+      termsAccepted,
+      newsletter
+    }
+
+    setFormSent(true)
+
+    console.log('Sending this somewhere...\n\n', Functions.convertObjectIntoURLParameters(result, false, true))
+  }
 
   return (
-    <div className="contact-us">
-      <div className="background"></div>
-      <h4>Contact us</h4>
+    <div className="contact-us" id="contactUs">
 
-      <div className="contact-info">
-        <div className="item">
-          <p>Media enquiries:</p>
-          <Link href="mailto:press@tuumplatform.com" rel={"noreferrer"}>
-            press@tuumplatform.com
-          </Link>
-        </div>
-        <div className="item">
-          <p>Career questions:</p>
-          <Link href="mailto:careers@tuumplatform.com" rel={"noreferrer"}>
-            careers@tuumplatform.com
-          </Link>
-        </div>
-      </div>
+      <PopOver onCloseButtonClick={() => {
+        formRef.current?.reset()
+        resetState()
+      }} formRef={formRef} condition={formSent}>
 
-      <form>
-        <Suspense fallback={null}>
+        <div className="heading">All good!</div>
+        <div className="text">
+          <div>
+            Thank you for your interest! You can close this form by pressing “&times;” on the top right corner.
+          </div>
+          <div>
+            P.S. Check DevTools console!
+          </div>
+        </div>
+
+      </PopOver>
+
+      <Suspense fallback={null}>
+
+        <div className="background"></div>
+        <h4>Contact us</h4>
+
+        <div className="contact-info">
+          <div className="item">
+            <p>Media enquiries:</p>
+            <Link href={`mailto:${contactInfo.pressEmail}`} target={"_blank"}>
+              {contactInfo.pressEmail}
+            </Link>
+          </div>
+          <div className="item">
+            <p>Career questions:</p>
+            <Link href={`mailto:${contactInfo.careerEmail}`} target={"_blank"}>
+              {contactInfo.careerEmail}
+            </Link>
+          </div>
+        </div>
+
+        <form ref={formRef} onSubmit={(event) => handleSubmit(event)}>
           <div className="split">
             <Input
+              onChange={setFirstName}
               name="first-name"
               placeholder="First name"
               required
               type="text"
             />
-            <Input name="last-name" placeholder="Last name" type="text" />
-            <Input name="email" placeholder="Email" required type="text" />
-            <Input name="job-title" placeholder="Job title" type="text" />
+            <Input onChange={setLastName} name="last-name" placeholder="Last name" type="text" />
+            <Input onChange={setEmail} name="email" placeholder="Email" required type="email" />
+            <Input onChange={setJobTitle} name="job-title" placeholder="Job title" type="text" />
             <div className="spacer"></div>
-            <Input
-              name="company-name"
+            <Input onChange={setCompany}
+              name="company"
               placeholder="Company name"
               required
               type="text"
             />
             <Dropdown
               required
-              name={"Industry"}
-              items={composeIndustryItems()}
+              name={"industry"}
+              label={"Industry"}
+              items={Functions.composeIndustryItems()}
               onChange={setIndustry}
             />
             <Dropdown
               required
-              name={"Country"}
-              items={composeCountryItems()}
+              name={"country"}
+              label={"Country"}
+              items={Functions.composeCountryItems()}
               isCountries
               onChange={setCountry}
             />
             <Dropdown
-              name={"Operating geography"}
-              items={composeGeographyItems()}
+              label={'Operating geography'}
+              name={"operatingGeography"}
+              items={Functions.composeGeographyItems()}
               onChange={setOperatingGeography}
             />
             <Input
+              onChange={setInquiry}
               textarea
-              name="topic"
+              name="inquiry"
               label={"What would you like to talk about?"}
             />
 
             <div className="checkboxes">
-              {/* <FormGroup> */}
-                <CustomCheckbox
-                  ariaLabel={
-                    "By submitting this form I accept privacy policy and cookie policy."
-                  }
-                  label={
-                    <>
-                      By submitting this form I accept{" "}
-                      <Link
-                        target={"_blank"}
-                        rel={"noreferrer"}
-                        href="/privacy-policy/"
-                      >
-                        privacy policy and cookie policy
-                      </Link>
-                      .
-                    </>
-                  }
-                />
-                <CustomCheckbox
-                  ariaLabel={"I would like to receive your newsletter."}
-                  label={"I would like to receive your newsletter."}
-                />
-              {/* </FormGroup> */}
+              <CustomCheckbox
+                name={'termsAccepted'}
+                required
+                onChange={setTermsAccepted}
+                label={
+                  <>
+                    By submitting this form I accept{" "}
+                    <Link
+                      target={"_blank"}
+                      rel={"noreferrer"}
+                      href="/privacy-policy/"
+                    >
+                      privacy policy and cookie policy
+                    </Link>
+                    .
+                  </>
+                }
+              />
+              <CustomCheckbox
+                onChange={setNewsletter}
+                name={'newsletter'}
+                label={"I would like to receive your newsletter."}
+              />
             </div>
+
+            <button disabled={formDisabled} type="submit" aria-label="Submit form">Submit form</button>
+
           </div>
-        </Suspense>
-      </form>
+        </form>
+      </Suspense>
     </div>
-  );
-};
+  )
+}

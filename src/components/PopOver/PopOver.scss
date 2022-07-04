@@ -1,0 +1,63 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.pop-over {
+    position: absolute;
+    display: block;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: $primary-color;
+    z-index: 10;
+    @include flex();
+    box-sizing: border-box;
+    transition: 0.5s ease;
+    transform: translate(-100%, 0%);
+
+    &.opened {
+        transform: translate(0%, 0%);
+        transition: 0.5s ease;
+    }
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .content {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0 48px;
+
+    }
+
+    .heading,
+    .text {
+        align-items: baseline;
+        display: block;
+        width: 100%;
+    }
+
+    .heading {
+        padding-bottom: 24px;
+        @include rem(font-size, 40);
+        @include rem(line-height, 50);
+    }
+
+    .text {
+
+        @include rem(font-size, 18);
+        @include rem(line-height, 28);
+    }
+
+    button.close {
+        position: absolute;
+        cursor: pointer;
+        right: 24px;
+        top: 0;
+        @include button-reset();
+        @include rem(font-size, 64);
+    }
+}

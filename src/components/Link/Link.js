@@ -3,7 +3,7 @@ import './Link.scss'
 
 const Link = ({children, href, target, rel}) => {
   return (
-    <a className='custom-link' href={href} rel={rel} target={target}>{children}</a>
+    <a className='custom-link' href={href} rel={rel || 'noreferrer'} target={target}>{children}</a>
   )
 }
 

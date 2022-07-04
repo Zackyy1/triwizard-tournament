@@ -6,14 +6,34 @@ body {
     overflow-x: hidden;
 }
 
-div {
+div:not(.pop-over) {
     transition-duration: 0ms !important;
     animation: none !important;
     transition: none;
 }
 
-h1,h2,h3,h4,h5,h6,p,li,ul,ol {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+ul,
+ol {
     margin: 0;
     padding: 0;
 
+}
+
+.skip-link {
+    margin-right: 1rem;
+    position: absolute;
+    transform: translateX(-200%);
+    width: 100%;
+
+    &:focus {
+        position: static;
+    }
 }

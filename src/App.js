@@ -25,11 +25,13 @@ const theme = createTheme({
 });
 function App() {
 
-  
+
 
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
+        <a className="skip-link" href="#contactUs">Skip to content</a>
+
         <ContactUs />
       </ThemeProvider>
     </div>

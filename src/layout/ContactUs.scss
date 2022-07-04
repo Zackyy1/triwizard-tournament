@@ -1,4 +1,5 @@
 @import "../styles/mixins";
+@import '../styles/variables';
 
 .contact-us {
   padding: 80px 72px 40px;
@@ -27,7 +28,7 @@
     width: 100%;
     min-height: 100vh;
     height: 100%;
-    background-color: #a7d0d8;
+    background-color: $primary-color;
     z-index: -1;
   }
 
@@ -75,6 +76,42 @@
           margin-right: 0;
         }
       }
+
+      button[type=submit] {
+
+        position: relative;
+        @include button-reset();
+        @include rem(font-size, 24);
+        @include rem(line-height, 32);
+        color: $dark-purple;
+        text-align: left;
+        display: block;
+        max-width: fit-content;
+        cursor: pointer;
+
+        &[disabled] {
+          opacity: 0.5;
+          cursor: default;
+        }
+
+        &:hover::after {
+          width: 0%;
+          opacity: 0;
+          transition: 0.5s ease;
+        }
+
+        &::after {
+          transition: 0.5s ease;
+          position: absolute;
+          content: '';
+          bottom: 0;
+          left: 0;
+          height: 1px;
+          width: 100%;
+          background-color: $dark-purple;
+        }
+      }
+
     }
   }
 }

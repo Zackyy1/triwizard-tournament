@@ -9,7 +9,6 @@
         }
 
         form {
-
             .split {
                 display: flex;
                 flex-direction: column;
@@ -17,13 +16,11 @@
                 .field:not(.textarea) {
                     width: 100%;
                     max-width: unset;
-
                 }
 
                 .spacer {
                     display: none;
                 }
-
             }
         }
     }

@@ -6,7 +6,6 @@
         grid-template-rows: 1fr;
         padding: 80px 44px 0;
 
-
         h4 {
             grid-column-start: unset;
             grid-row-start: 1;
@@ -22,13 +21,6 @@
         form {
             grid-area: unset;
 
-            .split {
-
-                .field {
-                    // min-width: 228px;
-                }
-            }
         }
-
     }
 }
